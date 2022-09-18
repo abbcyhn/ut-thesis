@@ -1,1 +1,0 @@
-curl -X POST -F image=@test.jpeg 'http://localhost:5000/api/detect' --output test.png
