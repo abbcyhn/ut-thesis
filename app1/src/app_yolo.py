@@ -1,11 +1,3 @@
-# @Author: Dwivedi Chandan
-# @Date:   2019-08-05T13:35:05+05:30
-# @Email:  chandandwivedi795@gmail.com
-# @Last modified by:   Dwivedi Chandan
-# @Last modified time: 2019-08-07T11:52:45+05:30
-
-
-# import the necessary packages
 import numpy as np
 import argparse
 import time
@@ -146,9 +138,9 @@ def get_predection(image,net,LABELS,COLORS):
     return image
 
 
-labelsPath="yolov3_tiny/coco.names"
-cfgpath="yolov3_tiny/yolov3_tiny.cfg"
-wpath="yolov3_tiny/yolov3_tiny.weights"
+labelsPath="yolov3/coco.names"
+cfgpath="yolov3/yolov3.cfg"
+wpath="yolov3/yolov3.weights"
 Lables=get_labels(labelsPath)
 CFG=get_config(cfgpath)
 Weights=get_weights(wpath)
@@ -157,26 +149,18 @@ Colors=get_colors(Lables)
 # Initialize the Flask application
 app = Flask(__name__)
 
-# route http posts to this method
 @app.route('/api/detect', methods=['POST'])
 def main():
-    # load our input image and grab its spatial dimensions
-    #image = cv2.imread("./test1.jpg")
     img = request.files["image"].read()
     img = Image.open(io.BytesIO(img))
     npimg=np.array(img)
     image=npimg.copy()
     image=cv2.cvtColor(image,cv2.COLOR_BGR2RGB)
     res=get_predection(image,nets,Lables,Colors)
-    # image=cv2.cvtColor(image,cv2.COLOR_BGR2RGB)
-    # show the output image
-    #cv2.imshow("Image", res)
-    #cv2.waitKey()
     image=cv2.cvtColor(res,cv2.COLOR_BGR2RGB)
     np_img=Image.fromarray(image)
     img_encoded=image_to_byte_array(np_img)
     return Response(response=img_encoded, status=200,mimetype="image/jpeg")
 
-    # start flask app
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
