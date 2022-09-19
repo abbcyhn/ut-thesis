@@ -1,6 +1,6 @@
 DOCKER CMDS:
-	docker build -t app1_fog:latest .
-	docker run -d -p 80:5000 app1_fog:latest
+	docker build -t app1-fog:latest .
+	docker run -d -p 80:5000 app1-fog:latest
 
 CURL CMNDS:
 	curl -X POST -F image=@traffic.jpg 'http://localhost:80/api/detect' --output traffic_yolo.png
