@@ -7,7 +7,7 @@ from PIL import Image
 from io import BytesIO
 
 FOG_API_ENDPOINT = "http://localhost:80/api/detect"
-CLOUD_API_ENDPOINT = "http://localhost:81/api/detect"
+CLOUD_API_ENDPOINT = "http://http://172.17.90.194:80/api/detect"
 
 def frame_to_bts(frame):
 	_, bts = cv2.imencode('.webp', frame)
