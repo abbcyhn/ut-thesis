@@ -8,4 +8,4 @@ RUN pip3 install -r requirements.txt
 RUN python3 setup.py build_ext --inplace
 RUN python3 aeneas_check_setup.py
 ENTRYPOINT [ "python3" ]
-CMD [ "app-rest-api.py" ]
+CMD [ "app2_rest_api.py" ]
