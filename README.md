@@ -35,3 +35,5 @@
 	python3 aeneas_check_setup.py
 
 	curl -X POST -F image=@traffic.jpg 'http://localhost:80/api/detect' --output traffic_yolo.png
+
+	curl -X POST -F audio=@p001.mp3 -F subtitle=@p001.xhtml 'http://localhost:81/api/sync' --output p001.json
