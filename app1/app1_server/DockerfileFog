@@ -5,12 +5,10 @@ ENV TZ=Europe/Tallinn
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 # install necessary ubuntu packages
-RUN apt update && apt upgrade
-RUN apt install python
-RUN apt install python-is-python3
-RUN apt-get install python3-pip python3-virtualenv
+RUN apt update -y && apt upgrade -y
 
-RUN apt install -y build-essential cmake \
+RUN apt install -y build-essential \
+  cmake \
   pkg-config \
   libjpeg-dev \
   libtiff5-dev \
@@ -36,7 +34,8 @@ RUN apt install -y build-essential cmake \
   libqt5webkit5 \
   libqt5test5 \
   python3-pyqt5 \
-  python3-dev
+  python3-dev \
+  python3-pip
 
 # change pwd
 COPY . /app
