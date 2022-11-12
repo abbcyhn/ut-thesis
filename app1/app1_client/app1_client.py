@@ -6,6 +6,7 @@ import numpy as np
 from PIL import Image
 from io import BytesIO
 
+VIDEO_INPUT_PATH = "traffic.mp4"
 FOG_API_ENDPOINT = "http://localhost:80/api/detect"
 CLOUD_API_ENDPOINT = "http://http://172.17.90.194:80/api/detect"
 
@@ -26,7 +27,7 @@ def sendto(frame, api_endpoint):
 
 def main():
 	index = 0
-	vid = cv2.VideoCapture('../../docs/traffic.mp4')
+	vid = cv2.VideoCapture(VIDEO_INPUT_PATH)
 	while(True):
 		ret, frame = vid.read()
 
