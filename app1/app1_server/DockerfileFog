@@ -5,12 +5,12 @@ ENV TZ=Europe/Tallinn
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 # install necessary ubuntu packages
-sudo apt update && sudo apt upgrade
-sudo apt install python
-sudo apt install python-is-python3
-sudo apt-get install python3-pip python3-virtualenv
+apt update && apt upgrade
+apt install python
+apt install python-is-python3
+apt-get install python3-pip python3-virtualenv
 
-sudo apt install -y build-essential cmake \
+apt install -y build-essential cmake \
   pkg-config \
   libjpeg-dev \
   libtiff5-dev \
