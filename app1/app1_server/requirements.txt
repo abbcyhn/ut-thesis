@@ -3,4 +3,4 @@ pybase64
 jsonpickle
 pillow
 numpy
-opencv-contrib-python
+opencv-contrib-python-headless
