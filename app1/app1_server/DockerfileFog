@@ -3,6 +3,7 @@ RUN apt-get update -y && apt-get install -y python3-pip python3-dev libsm6 libxe
 COPY . /app
 RUN rm -rf yolov3
 WORKDIR /app
+RUN wget -O yolov3_tiny.weights https://pjreddie.com/media/files/yolov3-tiny.weights
 RUN pip3 install --upgrade pip
 RUN pip3 install -r requirements.txt
 ENV YOLO_COCO_NAMES=yolov3_tiny/coco.names
