@@ -9,7 +9,7 @@ COPY . /app
 WORKDIR /app
 
 # install opencv
-RUN chmod x+a DockerfileFog.sh
+RUN chmod +x DockerfileFog.sh
 RUN ./DockerfileFog.sh
 
 # download yolov3 weights
