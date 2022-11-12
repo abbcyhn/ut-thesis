@@ -36,12 +36,12 @@ RUN apt install -y build-essential \
   python3-pip \
   wget
 
-RUN apt-get install apt-transport-https ca-certificates gnupg \
+RUN apt-get install -y apt-transport-https ca-certificates gnupg \
                          software-properties-common wget
 
 RUN apt-add-repository 'deb https://apt.kitware.com/ubuntu/ bionic main'
-RUN apt-get update
-RUN apt-get install cmake
+RUN apt-get update -y
+RUN apt-get install -y cmake
 
 # change pwd
 COPY . /app
