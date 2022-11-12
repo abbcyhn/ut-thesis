@@ -3,39 +3,13 @@ FROM arm32v7/ubuntu:18.04
 # install necessary ubuntu packages
 RUN apt update -y && apt upgrade -y
 
-RUN apt-get install -y cmake
-RUN apt-get install -y python3-pip python3-dev
-RUN apt-get install -y gcc gcc-c++
-
-RUN apt-get install -y gtk2-devel
-RUN apt-get install -y libv4l-devel
-RUN apt-get install -y ffmpeg-devel
-RUN apt-get install -y gstreamer-plugins-base-devel
-
-RUN apt-get install -y libpng-devel
-RUN apt-get install -y libjpeg-turbo-devel
-RUN apt-get install -y jasper-devel
-RUN apt-get install -y openexr-devel
-RUN apt-get install -y libtiff-devel
-RUN apt-get install -y libwebp-devel
-
-RUN apt-get install -y git
-
-
 # change pwd
 COPY . /app
 #RUN rm -rf yolov3_tiny
 WORKDIR /app
 
 # install opencv
-RUN git clone https://github.com/opencv/opencv.git
-RUN cd /opencv
-RUN mkdir build
-RUN cd build
-RUN cmake ../
-RUN make
-RUN make install -y
-RUN cd ../..
+RUN /DockerfileFog.sh
 
 # download yolov3 weights
 # RUN wget https://pjreddie.com/media/files/yolov3.weights
