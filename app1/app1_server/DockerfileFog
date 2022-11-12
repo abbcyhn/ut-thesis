@@ -1,6 +1,6 @@
 FROM ubuntu:18.04
 RUN apt-get update -y && apt-get install -y python3-pip python3-dev libsm6 libxext6 libxrender-dev libglu1
-RUN apt install wget
+RUN apt-get install wget
 COPY . /app
 RUN rm -rf yolov3
 WORKDIR /app
