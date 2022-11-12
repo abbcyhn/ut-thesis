@@ -26,14 +26,22 @@
 
 
 
-## General commands
+## Docker commands
 
-### 1) Docker build
+### 1) Docker config
+
+- sudo groupadd docker
+- sudo usermod -aG docker $USER
+- newgrp docker
+- sudo chmod 666 /var/run/docker.sock
+- sudo systemctl restart docker
+
+### 2) Docker build
 
 - docker build -t $CONTAINER_NAME:latest . 
-- docker build -t $IMAGE_NAME -f ./docker/$DOCKER_FILE_NAME .
+- docker build -t $IMAGE_NAME -f $DOCKER_FILE_NAME .
 	
-### 2) Docker run, exec, logs
+### 3) Docker run, exec, logs
 
 - docker run -d -p 81:5000 $CONTAINER_NAME:latest
 - docker exec -it $CONTAINER_NAME sh
