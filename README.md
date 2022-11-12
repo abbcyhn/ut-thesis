@@ -7,7 +7,7 @@
 - [x] [Server Side](/app1/app1_server/)
 - [x] [System Architecture](/app1/app1.png)
 - Testing scripts
-	- curl -X POST -F image=@traffic.jpg 'http://localhost:80/api/detect' --output traffic_yolo.png
+	- curl -X POST -F image=@traffic.jpg 'http://$IP:$PORT/api/detect' --output traffic_yolo.png
 
 ### 2) Application 2 - Text-audio synchronisation or forced alignment (Aeneas)
 - [ ] [Client Side](/app2/app2_client/)
@@ -17,7 +17,7 @@
 	- python3 -m aeneas.diagnostics
 	- python3 setup.py build_ext --inplace
 	- python3 aeneas_check_setup.py
-	- curl -X POST -F audio=@p001.mp3 -F subtitle=@p001.xhtml 'http://localhost:81/api/sync' --output p001.json
+	- curl -X POST -F audio=@p001.mp3 -F subtitle=@p001.xhtml 'http://$IP:$PORT/api/sync' --output p001.json
 
 ### 3) Application 3 - Speech-to-text conversion (PocketSphinx)
 - [ ] [Client Side](/app3/app3_client/)
@@ -26,7 +26,7 @@
 
 
 
-## Docker commands
+## Usefull commands
 
 ### 1) Docker config
 
@@ -43,6 +43,13 @@
 	
 ### 3) Docker run, exec, logs
 
-- docker run -d -p 81:5000 $CONTAINER_NAME:latest
+- docker run -d -p 80:5000 $CONTAINER_NAME:latest
 - docker exec -it $CONTAINER_NAME sh
 - docker logs -f --tail 10 $CONTAINER_NAME
+
+### 4) Python install, activate, deactivate "virtualenv"
+
+- python3 -m pip install virtualenv
+- python3 -m virtualenv env
+- source env/bin/activate
+- deactivate
