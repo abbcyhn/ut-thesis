@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # download input video from google drive
 # https://drive.google.com/file/d/1uX_g9OQJE6L0ZD_1HO8hNPeZyqcARLzJ/view?usp=share_link
 
