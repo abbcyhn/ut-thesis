@@ -9,7 +9,7 @@ if [ -f /etc/os-release ]; then
     VER=$VERSION_ID
 fi
 # install the dependencies
-apt-get install -y build-essential cmake git unzip pkg-config
+apt-get install -y apt-utils build-essential cmake git unzip pkg-config
 apt-get install -y libjpeg-dev libtiff-dev libpng-dev
 apt-get install -y libavcodec-dev libavformat-dev libswscale-dev
 apt-get install -y libgtk2.0-dev libcanberra-gtk* libgtk-3-dev
@@ -28,6 +28,7 @@ apt-get install -y libopenblas-dev libatlas-base-dev libblas-dev
 apt-get install -y liblapack-dev gfortran libhdf5-dev
 apt-get install -y libprotobuf-dev libgoogle-glog-dev libgflags-dev
 apt-get install -y protobuf-compiler
+apt-get install -y wget
 
 # remove old versions
 cd ~ 
