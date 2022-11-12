@@ -38,7 +38,7 @@
 
 ### 2) Docker build
 
-- docker build -t $CONTAINER_NAME:latest . 
+- docker build -t $IMAGE_NAME:latest . 
 - docker build -t $IMAGE_NAME -f $DOCKER_FILE_NAME .
 	
 ### 3) Docker run, exec, logs
