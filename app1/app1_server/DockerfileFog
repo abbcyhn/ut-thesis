@@ -1,0 +1,12 @@
+FROM ubuntu:18.04
+RUN apt-get update -y && apt-get install -y python3-pip python3-dev libsm6 libxext6 libxrender-dev libglu1
+COPY . /app
+RUN rm -rf yolov3
+WORKDIR /app
+RUN pip3 install --upgrade pip
+RUN pip3 install -r requirements.txt
+ENV YOLO_COCO_NAMES=yolov3_tiny/coco.names
+ENV YOLO_CONFIG=yolov3_tiny/yolov3_tiny.cfg
+ENV YOLO_WEIGHTS=yolov3_tiny/yolov3_tiny.weights
+ENTRYPOINT [ "python3" ]
+CMD [ "app1_server.py" ]

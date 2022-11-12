@@ -6,11 +6,18 @@
 - [x] [Distribution](/app1/app1_distribution/)
 - [x] [Rest Api](/app1/app1_rest_api/)
 - [x] [System Architecture](/app1/app1.png)
+- Testing scripts
+	- curl -X POST -F image=@traffic.jpg 'http://localhost:80/api/detect' --output traffic_yolo.png
 
 ### 2) Application 2
 - [ ] [Distribution](/app2/app2_distribution/)
 - [ ] [Rest Api](/app2/app2_rest_api/)
 - [x] [System Architecture](/app2/app2.png)
+- Testing scripts
+	- python3 -m aeneas.diagnostics
+	- python3 setup.py build_ext --inplace
+	- python3 aeneas_check_setup.py
+	- curl -X POST -F audio=@p001.mp3 -F subtitle=@p001.xhtml 'http://localhost:81/api/sync' --output p001.json
 
 ### 3) Application 3
 - [ ] [Distribution](/app3/app3_distribution/)
@@ -20,20 +27,14 @@
 
 
 ## General commands
-	docker build -t app2-fog:latest . 
+
+### 1) Docker build
+
+- docker build -t $CONTAINER_NAME:latest . 
+- docker build -t $IMAGE_NAME -f ./docker/$DOCKER_FILE_NAME .
 	
-	docker run -d -p 81:5000 app2-fog:latest
+### 2) Docker run, exec, logs
 
-	docker exec -it container_name sh
-
-	docker logs -f --tail 10 container_name
-
-	python3 -m aeneas.diagnostics
-
-	python3 setup.py build_ext --inplace
-
-	python3 aeneas_check_setup.py
-
-	curl -X POST -F image=@traffic.jpg 'http://localhost:80/api/detect' --output traffic_yolo.png
-
-	curl -X POST -F audio=@p001.mp3 -F subtitle=@p001.xhtml 'http://localhost:81/api/sync' --output p001.json
+- docker run -d -p 81:5000 $CONTAINER_NAME:latest
+- docker exec -it $CONTAINER_NAME sh
+- docker logs -f --tail 10 $CONTAINER_NAME

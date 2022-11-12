@@ -138,9 +138,9 @@ def get_predection(image,net,LABELS,COLORS):
     return image
 
 
-labelsPath="yolov3/coco.names"
-cfgpath="yolov3/yolov3.cfg"
-wpath="yolov3/yolov3.weights"
+labelsPath=os.getenv('YOLO_COCO_NAMES')
+cfgpath=os.getenv('YOLO_CONFIG')
+wpath=os.getenv('YOLO_WEIGHTS')
 Lables=get_labels(labelsPath)
 CFG=get_config(cfgpath)
 Weights=get_weights(wpath)
