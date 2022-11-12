@@ -39,7 +39,7 @@ RUN apt install -y build-essential \
 RUN apt-get install -y apt-transport-https ca-certificates gnupg \
                          software-properties-common wget
 
-RUN apt-add-repository 'deb https://apt.kitware.com/ubuntu/ bionic main'
+#RUN apt-add-repository 'deb https://apt.kitware.com/ubuntu/ bionic main'
 RUN apt-get update -y
 RUN apt-get install -y cmake
 
