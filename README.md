@@ -2,14 +2,14 @@
 
 ## Applications
 
-### 1) Application 1 - Deep learning based object classification us-ing YOLOv3
+### 1) Application 1 - Deep learning based object classification using YOLOv3
 - [x] [Client Side](/app1/app1_client/)
 - [x] [Server Side](/app1/app1_server/)
 - [x] [System Architecture](/app1/app1.png)
 - Testing scripts
 	- curl -X POST -F image=@traffic.jpg 'http://localhost:80/api/detect' --output traffic_yolo.png
 
-### 2) Application 2 - Text-audio synchronisation or forced align-ment (Aeneas)
+### 2) Application 2 - Text-audio synchronisation or forced alignment (Aeneas)
 - [ ] [Client Side](/app2/app2_client/)
 - [ ] [Server Side](/app2/app2_server/)
 - [x] [System Architecture](/app2/app2.png)
