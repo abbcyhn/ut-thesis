@@ -1,14 +1,34 @@
+# set image
 FROM ubuntu:18.04
-RUN apt-get update -y && apt-get install -y python3-pip python3-dev libsm6 libxext6 libxrender-dev libglu1
-RUN apt-get install -y wget
+
+# install necessary packages
+RUN apt-get update -y && apt-get install -y python3-pip \
+  python3-dev \ 
+  libsm6 \
+  libxext6 \
+  libxrender-dev \
+  libglu1 \
+  wget
+
+# change pwd
 COPY . /app
-RUN rm -rf yolov3_tiny
+RUN rm -rf yolov3
 WORKDIR /app
+
+# download yolov3 weights
+RUN cd yolov3-tiny
 RUN wget https://pjreddie.com/media/files/yolov3-tiny.weights
+RUN cd ..
+
+# install pip packages
 RUN pip3 install --upgrade pip
 RUN pip3 install -r requirements.txt
+
+# set yolov3 environment variables
 ENV YOLO_COCO_NAMES=yolov3-tiny/coco.names
 ENV YOLO_CONFIG=yolov3-tiny/yolov3-tiny.cfg
 ENV YOLO_WEIGHTS=yolov3-tiny/yolov3-tiny.weights
+
+# run application
 ENTRYPOINT [ "python3" ]
 CMD [ "app1_server.py" ]
