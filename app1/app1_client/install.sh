@@ -1,2 +1,2 @@
-chmod a+x install_services_helper.sh
-yes 'yes' | ./install_services_helper.sh
+chmod a+x install_helper.sh
+yes 'yes' | ./install_helper.sh
