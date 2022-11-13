@@ -1,29 +1,14 @@
-FROM arm32v7/ubuntu:18.04
-
-# install necessary ubuntu packages
-RUN apt update -y && apt upgrade -y
-
-# change pwd
+FROM ubuntu:18.04
+RUN apt-get update -y && apt-get install -y python3-pip python3-dev libsm6 libxext6 libxrender-dev libglu1
+RUN apt-get install -y wget
 COPY . /app
-#RUN rm -rf yolov3_tiny
+RUN rm -rf yolov3_tiny
 WORKDIR /app
-
-# install opencv
-RUN chmod +x DockerfileFog.sh
-RUN ./DockerfileFog.sh
-
-# download yolov3 weights
-# RUN wget https://pjreddie.com/media/files/yolov3.weights
-
-# install pip
+RUN wget https://pjreddie.com/media/files/yolov3-tiny.weights
 RUN pip3 install --upgrade pip
 RUN pip3 install -r requirements.txt
-
-# set environment variable for yolov3
-ENV YOLO_COCO_NAMES=yolov3/coco.names
-ENV YOLO_CONFIG=yolov3/yolov3.cfg
-ENV YOLO_WEIGHTS=yolov3/yolov3.weights
-
-# run application
+ENV YOLO_COCO_NAMES=yolov3-tiny/coco.names
+ENV YOLO_CONFIG=yolov3-tiny/yolov3-tiny.cfg
+ENV YOLO_WEIGHTS=yolov3-tiny/yolov3-tiny.weights
 ENTRYPOINT [ "python3" ]
 CMD [ "app1_server.py" ]
