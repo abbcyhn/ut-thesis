@@ -36,14 +36,14 @@
 - sudo chmod 666 /var/run/docker.sock
 - sudo systemctl restart docker
 
-### 2) Docker build
+### 2) Docker build, run
 
 - docker build -t $IMAGE_NAME:latest . 
 - docker build -t $IMAGE_NAME -f $DOCKER_FILE_NAME .
-	
-### 3) Docker run, exec, logs
+- docker run -d -p 80:5000 $IMAGE_NAME:latest
 
-- docker run -d -p 80:5000 $CONTAINER_NAME:latest
+### 3) Docker exec, logs
+
 - docker exec -it $CONTAINER_NAME sh
 - docker logs -f --tail 10 $CONTAINER_NAME
 
