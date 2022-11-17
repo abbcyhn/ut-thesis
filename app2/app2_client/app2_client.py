@@ -2,10 +2,10 @@ import os
 import requests
 from pydub import AudioSegment
 
-AUDIO_INPUT_PATH = "input/p001.mp3"
-SUBTITLE_INPUT_PATH = "input/p001.xhtml"
+AUDIO_INPUT_PATH = "input/audio.mp3"
+SUBTITLE_INPUT_PATH = "input/subtitle.txt"
 FOG_API_ENDPOINT = "http://localhost:81/api/sync"
-CLOUD_API_ENDPOINT = "http://http://172.17.90.194:81/api/sync"
+CLOUD_API_ENDPOINT = "http://172.17.90.194:81/api/sync"
 
 def sendto(audio, subtitle, api_endpoint):
 	response = requests.post(url = api_endpoint, files={'audio': audio, 'subtitle': subtitle})

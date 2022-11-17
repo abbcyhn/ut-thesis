@@ -5,7 +5,7 @@ sudo apt install -y \
     python3-dev \
     wget
 
-# download yolov3 weights
+# download input
 mkdir input
 cd input/
 FILEID="1uX_g9OQJE6L0ZD_1HO8hNPeZyqcARLzJ"

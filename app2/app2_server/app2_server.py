@@ -1,8 +1,4 @@
 """
-    curl -X POST -F audio=@p001.mp3 -F subtitle=@p001.xhtml 'http://localhost:81/api/sync' --output p001.json
-"""
-
-"""
 python -m aeneas.tools.execute_task \
     ../p001.mp3 \
     ../p001.xhtml \
@@ -44,13 +40,14 @@ def main():
 	aat.ExecuteTaskCLI().run(arguments=['', audio_path, subtitle_path, cfg, output_path])
 
 	output_content = ''
-
 	if(os.path.exists(output_path)): 
 		with open(output_path, "r") as txt_file:
 			output_content = txt_file.readlines()
-		os.remove(audio_path)
-		os.remove(subtitle_path)
 		os.remove(output_path)
+	if(os.path.exists(audio_path)):
+		os.remove(audio_path)
+	if(os.path.exists(subtitle_path)):
+		os.remove(subtitle_path)
 
 	return Response(response = output_content, status = 200, mimetype = "application/json")
 
