@@ -29,7 +29,7 @@ def main():
 	audio_path = f'{mainfolder}/{unique_filename}.{audio_ext}'
 	subtitle_path = f'{mainfolder}/{unique_filename}.{subtitle_ext}'
 	output_path = f'{mainfolder}/{unique_filename}.{output_ext}'
-	cfg = 'task_language=eng|os_task_file_format=json|is_text_type=plain'
+	cfg = f'task_language=eng|os_task_file_format={output_ext}|is_text_type=plain'
 
 	audio_file = request.files["audio"].read()
 	subtitle_file = request.files["subtitle"].read()
