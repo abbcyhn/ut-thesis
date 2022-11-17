@@ -21,8 +21,8 @@ app = Flask(__name__)
 def main():
 	mainfolder = '..'
 	audio_ext = 'mp3'
-	subtitle_ext = 'xhtml'
-	output_ext = 'json'
+	subtitle_ext = 'txt'
+	output_ext = 'srt'
 
 	unique_filename = str(uuid.uuid4())
 
