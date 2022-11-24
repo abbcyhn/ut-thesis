@@ -15,24 +15,29 @@ OUTPUT_PATH = "output"
 SUBTITLE_OUTPUT_PATH = f"{OUTPUT_PATH}/pulp_fiction.srt"
 
 FOG_API_ENDPOINT = "http://localhost:5000/api/sync"
-CLOUD_API_ENDPOINT = "http://172.17.90.194:81/api/sync"
+CLOUD_API_ENDPOINT = "http://localhost:5000/api/sync"
 
 
 ###################################################################### AUDIO SLICING
+def get_count_of_audio_slices():
+	audio = AudioSegment.from_mp3(AUDIO_INPUT_PATH)
+	audio_slices = audio[::10000]
+	return len(list(audio_slices))
+
 def split_audios():
 	audio = AudioSegment.from_mp3(AUDIO_INPUT_PATH)
 	audio_slices = audio[::10000]
 
-	slice_counter = 0
+	# slice_counter = 0
 	for index, chunk in enumerate(audio_slices):
 		# write audio slice
 		audio_slice_path = f"{INPUT_PATH}/pulp_fiction_audio_{index}.mp3"	
 		with open(audio_slice_path, "wb") as f:
 			chunk.export(f, format="mp3")
 		
-		slice_counter += 1
+	# 	slice_counter += 1
 	
-	return slice_counter
+	# return slice_counter
 
 
 ###################################################################### SUBTITLE SLICING
@@ -99,9 +104,16 @@ def convert_to_subtitles(line_counter, jsonfile, offset, filepath):
 
 
 def main():
-	slice_counter = split_audios()
+	print("CALCULATING count of audio slices")
+	slice_counter = get_count_of_audio_slices()
+
+	print("SPLITTING audios")
+	split_audios()
+
+	print("SPLITTING subtitles")
 	split_subtitles(slice_counter)
 
+	print("SENDING api is started")
 	line_counter = 0
 	for index in range(slice_counter):
 		response = "EMPTY RESPONSE"
