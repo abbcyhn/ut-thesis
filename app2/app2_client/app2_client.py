@@ -47,6 +47,14 @@ def split_subtitles(slice_counter):
 	for index in range(slice_counter):
 		# write subtitle slice
 		subtitle_slice_path = f"{INPUT_PATH}/subtitle_{index}.txt"
+
+		### DEBUG
+		print(f"{type(subtitle_slices)}")
+		print(f"{type(subtitle_slices[index])}")
+		print(f"{subtitle_slices}")
+		print(f"{subtitle_slices[index]}")
+
+
 		with open(subtitle_slice_path, "w") as f:
 			for subtitle in list(subtitle_slices[index]):
 				f.write(subtitle)
