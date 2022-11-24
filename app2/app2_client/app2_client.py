@@ -45,8 +45,8 @@ def get_as_list(jsonfile):
 def convert_to_subtitles(line_counter, jsonfile, offset, filepath):
 	l = get_as_list(jsonfile)
 
-	line_counter += 1
 	for i in l:
+		line_counter += 1
 		begin = change_format(i['begin'], offset)
 		end = change_format(i['end'], offset)
 		lines = i['lines']
@@ -57,7 +57,6 @@ def convert_to_subtitles(line_counter, jsonfile, offset, filepath):
 			subtitle += f"\n{line}"
 		subtitle += "\n\n"
 		with open(filepath, 'a') as f: f.write(subtitle)
-		line_counter += 1
 	
 	return line_counter
 
