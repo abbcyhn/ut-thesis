@@ -49,9 +49,8 @@ def change_format(sec, offset):
 
 
 def get_as_list(jsonfile):
-	with open(jsonfile, "r") as jsonfile:
-		myjson = json.load(jsonfile)
-	#myjson = json.load(jsonfile)
+	jsonfile = jsonfile.decode('utf8').replace("'", '"')
+	myjson = json.load(jsonfile)
 	return myjson['fragments']
 
 def convert_to_subtitles(jsonfile, offset):
