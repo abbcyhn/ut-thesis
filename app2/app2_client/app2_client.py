@@ -42,7 +42,7 @@ def readsubtitles(filepath):
 	return lines
 
 def split_subtitles(slice_counter):
-	subtitle_slices = split_subtitles_helper(readsubtitles(SUBTITLE_INPUT_PATH), slice_counter)
+	subtitle_slices = split_subtitles_helper(readsubtitles(SUBTITLE_INPUT_PATH), slice_counter)[0]
 
 	for index in range(slice_counter):
 		# write subtitle slice
@@ -58,6 +58,8 @@ def split_subtitles(slice_counter):
 		with open(subtitle_slice_path, "w") as f:
 			for subtitle in list(subtitle_slices[index]):
 				f.write(subtitle)
+
+	raise Exception("Salam")
 
 def split_subtitles_helper(a, n):
     k, m = divmod(len(a), n)
@@ -111,7 +113,7 @@ def main():
 	split_subtitles(slice_counter)
 
 	line_counter = 0
-	for index in slice_counter:
+	for index in range(slice_counter):
 		response = "EMPTY RESPONSE"
 
 		# audio slice
