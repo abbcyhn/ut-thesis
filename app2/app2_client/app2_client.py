@@ -22,17 +22,6 @@ def sendto(audio_path, subtitle_path, api_endpoint):
 	response = requests.post(url = api_endpoint, files=files)
 	return response.content
 
-def readfile(filepath):
-	try:
-		with open(filepath, "rb") as f:
-			b = f.read(1)
-			mybytearray = bytearray()
-			while b:
-				mybytearray += b
-				b = f.read(1)
-	except IOError:
-		raise Exception('Error While Opening the file!')  
-
 def readlines(filepath):
 	with open(filepath, 'r') as f:
 		lines = f.readlines()
@@ -55,8 +44,7 @@ def get_as_list(jsonfile):
 	myjson = json.loads(jsonfile)
 	return myjson['fragments']
 
-def convert_to_subtitles(jsonfile, offset):
-	subtitles = []
+def convert_to_subtitles(jsonfile, offset, filepath):
 	l = get_as_list(jsonfile)
 
 	index = 1
@@ -70,15 +58,8 @@ def convert_to_subtitles(jsonfile, offset):
 		for line in lines:
 			subtitle += f"\n{line}"
 		subtitle += "\n\n"
-		subtitles.append(subtitle)
+		with open(filepath, 'a') as f: f.write(subtitle)
 		index += 1
-
-	return subtitles
-
-def append_subtitles(subtitles, filepath):
-	for subtitle in subtitles:
-		with open(filepath, 'a') as f:
-			f.write(subtitle)
 
 def main():
 	audio = AudioSegment.from_mp3(AUDIO_INPUT_PATH)
@@ -113,16 +94,31 @@ def main():
 			response = sendto(audio_slice_path, subtitle_slice_path, CLOUD_API_ENDPOINT)
 			print("RETRIEVING FROM CLOUD")
 
-		print(response)
-
 		offset = index * 10
-		subtitles = convert_to_subtitles(response, offset)
-		append_subtitles(subtitles, SUBTITLE_OUTPUT_PATH)
+		convert_to_subtitles(response, offset, SUBTITLE_OUTPUT_PATH)
 
 		# remove slices
-		#os.remove(audio_slice_path)
-		#os.remove(subtitle_slice_path)
+		os.remove(audio_slice_path)
+		os.remove(subtitle_slice_path)
 
 
 if __name__ == '__main__':
 	main()
+
+
+# def readfile(filepath):
+# 	try:
+# 		with open(filepath, "rb") as f:
+# 			b = f.read(1)
+# 			mybytearray = bytearray()
+# 			while b:
+# 				mybytearray += b
+# 				b = f.read(1)
+# 	except IOError:
+# 		raise Exception('Error While Opening the file!')  
+
+
+# def append_subtitles(subtitles, filepath):
+# 	for subtitle in subtitles:
+# 		with open(filepath, 'a') as f: 
+# 			f.write(subtitle)
