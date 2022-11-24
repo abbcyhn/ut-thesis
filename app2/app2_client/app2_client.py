@@ -84,9 +84,7 @@ def main():
 	audio_slices = audio[::10000]
 	subtitle_slices = readlines(SUBTITLE_INPUT_PATH)
 
-	audio_slice = readfile(AUDIO_INPUT_PATH)
-	subtitle_slice = readfile(SUBTITLE_INPUT_PATH)
-	response = sendto(audio_slice, subtitle_slice, FOG_API_ENDPOINT)
+	response = sendto(AUDIO_INPUT_PATH, SUBTITLE_INPUT_PATH, FOG_API_ENDPOINT)
 	print(response)
 	return
 
