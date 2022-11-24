@@ -84,10 +84,6 @@ def main():
 	audio_slices = audio[::10000]
 	subtitle_slices = readlines(SUBTITLE_INPUT_PATH)
 
-	response = sendto(AUDIO_INPUT_PATH, SUBTITLE_INPUT_PATH, FOG_API_ENDPOINT)
-	print(response)
-	return
-
 	subtitle_index = -1
 	for index, chunk in enumerate(audio_slices):
 		response = "EMPTY RESPONSE"
@@ -96,8 +92,6 @@ def main():
 		audio_slice_path = f"{INPUT_PATH}/audio_{index}.mp3"	
 		with open(audio_slice_path, "wb") as f:
 			chunk.export(f, format="mp3")
-		audio_slice = readfile(audio_slice_path)
-		#os.remove(audio_slice_path)
 
 		# read subtitle slice
 		subtitle_slice_path = f"{INPUT_PATH}/subtitle_{index}.txt"
@@ -106,24 +100,25 @@ def main():
 			f.write(subtitle_slices[subtitle_index])
 			subtitle_index += 1
 			f.write(subtitle_slices[subtitle_index])
-		subtitle_slice = readfile(subtitle_slice_path)
-		#os.remove(subtitle_slice_path)
 
 		# send to fog
 		if (index % 2 == 0):
 			print("SENDING TO FOG")
-			response = sendto(audio_slice, subtitle_slice, FOG_API_ENDPOINT)
+			response = sendto(audio_slice_path, subtitle_slice_path, FOG_API_ENDPOINT)
 			print("RETRIEVING FROM FOG")
 		# send to cloud
 		else:
 			print("SENDING TO CLOUD")
-			response = sendto(audio_slice, subtitle_slice, CLOUD_API_ENDPOINT)
+			response = sendto(audio_slice_path, subtitle_slice_path, CLOUD_API_ENDPOINT)
 			print("RETRIEVING FROM CLOUD")
 		
-
 		offset = index * 10
 		subtitles = convert_to_subtitles(response, offset)
 		append_subtitles(subtitles, SUBTITLE_OUTPUT_PATH)
+
+		# remove slices
+		#os.remove(audio_slice_path)
+		#os.remove(subtitle_slice_path)
 
 
 if __name__ == '__main__':
