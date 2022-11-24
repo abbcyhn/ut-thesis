@@ -100,7 +100,7 @@ def convert_to_subtitles(line_counter, jsonfile, offset, filepath):
 
 def main():
 	slice_counter = split_audios()
-	split_audios(slice_counter)
+	split_subtitles(slice_counter)
 
 	line_counter = 0
 	for index in slice_counter:
