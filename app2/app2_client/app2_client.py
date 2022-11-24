@@ -9,7 +9,7 @@ from pydub import AudioSegment
 ###################################################################### CONSTANTS
 INPUT_PATH = "input"
 AUDIO_INPUT_PATH = f"{INPUT_PATH}/simple_audio.mp3"
-SUBTITLE_INPUT_PATH = f"{INPUT_PATH}/simple_subtitle.txt"
+SUBTITLE_INPUT_PATH = f"{INPUT_PATH}/simple_subtitle_input.txt"
 
 OUTPUT_PATH = "output"
 SUBTITLE_OUTPUT_PATH = f"{OUTPUT_PATH}/simple_subtitle_output.srt"
