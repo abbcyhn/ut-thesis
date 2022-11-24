@@ -14,8 +14,8 @@ SUBTITLE_INPUT_PATH = f"{INPUT_PATH}/simple_subtitle_input.txt"
 OUTPUT_PATH = "output"
 SUBTITLE_OUTPUT_PATH = f"{OUTPUT_PATH}/simple_subtitle_output.srt"
 
-FOG_API_ENDPOINT = "http://localhost:5000/api/sync"
-CLOUD_API_ENDPOINT = "http://localhost:5000/api/sync"
+FOG_API_ENDPOINT = "http://localhost:81/api/sync"
+CLOUD_API_ENDPOINT = "http://172.17.90.194:81/api/sync"
 
 
 ###################################################################### AUDIO SLICING
