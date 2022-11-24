@@ -134,21 +134,3 @@ def main():
 
 if __name__ == '__main__':
 	main()
-
-
-# def readfile(filepath):
-# 	try:
-# 		with open(filepath, "rb") as f:
-# 			b = f.read(1)
-# 			mybytearray = bytearray()
-# 			while b:
-# 				mybytearray += b
-# 				b = f.read(1)
-# 	except IOError:
-# 		raise Exception('Error While Opening the file!')  
-
-
-# def append_subtitles(subtitles, filepath):
-# 	for subtitle in subtitles:
-# 		with open(filepath, 'a') as f: 
-# 			f.write(subtitle)
