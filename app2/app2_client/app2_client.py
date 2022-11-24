@@ -52,7 +52,7 @@ def get_as_list(jsonfile):
 	jsonfile = jsonfile.decode('utf8').replace("'", '"')
 	print(f"JSON TYPE IS {type(jsonfile)}")
 	print(f"JSON IS {jsonfile}")
-	myjson = json.load(jsonfile)
+	myjson = json.loads(jsonfile)
 	return myjson['fragments']
 
 def convert_to_subtitles(jsonfile, offset):
