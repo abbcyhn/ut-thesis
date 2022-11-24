@@ -80,6 +80,12 @@ def main():
 	audio_slices = audio[::10000]
 	subtitle_slices = readlines(SUBTITLE_INPUT_PATH)
 
+	audio_slice = readfile(AUDIO_INPUT_PATH)
+	subtitle_slice = readfile(SUBTITLE_INPUT_PATH)
+	response = sendto(audio_slice, subtitle_slice, FOG_API_ENDPOINT)
+	print(response)
+	return
+
 	subtitle_index = -1
 	for index, chunk in enumerate(audio_slices):
 		response = "EMPTY RESPONSE"
@@ -112,10 +118,10 @@ def main():
 			response = sendto(audio_slice, subtitle_slice, CLOUD_API_ENDPOINT)
 			print("RETRIEVING FROM CLOUD")
 		
-		print(response)
-		#offset = index * 10
-		#subtitles = convert_to_subtitles(response, offset)
-		#append_subtitles(subtitles, SUBTITLE_OUTPUT_PATH)
+
+		offset = index * 10
+		subtitles = convert_to_subtitles(response, offset)
+		append_subtitles(subtitles, SUBTITLE_OUTPUT_PATH)
 
 
 if __name__ == '__main__':
