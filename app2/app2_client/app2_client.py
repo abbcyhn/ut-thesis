@@ -128,8 +128,8 @@ def main():
 		line_counter = convert_to_subtitles(line_counter, response, offset, SUBTITLE_OUTPUT_PATH)
 
 		# remove slices
-		#os.remove(audio_slice_path)
-		#os.remove(subtitle_slice_path)
+		os.remove(audio_slice_path)
+		os.remove(subtitle_slice_path)
 
 
 if __name__ == '__main__':
