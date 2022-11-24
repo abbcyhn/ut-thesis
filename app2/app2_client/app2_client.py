@@ -48,7 +48,7 @@ def split_subtitles(slice_counter):
 		# write subtitle slice
 		subtitle_slice_path = f"{INPUT_PATH}/subtitle_{index}.txt"
 		with open(subtitle_slice_path, "w") as f:
-			for subtitle in subtitle_slices[index]:
+			for subtitle in list(subtitle_slices[index]):
 				f.write(subtitle)
 
 def split_subtitles_helper(a, n):
