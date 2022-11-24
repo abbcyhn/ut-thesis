@@ -112,9 +112,10 @@ def main():
 			response = sendto(audio_slice, subtitle_slice, CLOUD_API_ENDPOINT)
 			print("RETRIEVING FROM CLOUD")
 		
-		offset = index * 10
-		subtitles = convert_to_subtitles(response, offset)
-		append_subtitles(subtitles, SUBTITLE_OUTPUT_PATH)
+		print(response)
+		#offset = index * 10
+		#subtitles = convert_to_subtitles(response, offset)
+		#append_subtitles(subtitles, SUBTITLE_OUTPUT_PATH)
 
 
 if __name__ == '__main__':
