@@ -22,12 +22,14 @@ def sendto(audio_path, subtitle_path, api_endpoint):
 	response = requests.post(url = api_endpoint, files=files)
 	return response.content
 
+def split_subtitles(a, n):
+    k, m = divmod(len(a), n)
+    return (a[i*k+min(i, m):(i+1)*k+min(i+1, m)] for i in range(n))
+
 def readlines(filepath):
 	with open(filepath, 'r') as f:
 		lines = f.readlines()
 	return lines
-
-
 
 def change_format(sec, offset):
 	sec = sec.split('.')
@@ -35,7 +37,6 @@ def change_format(sec, offset):
 	ms = sec[1]
 	st = f"{time.strftime('%H:%M:%S', time.gmtime(s))},{ms}"
 	return st
-
 
 def get_as_list(jsonfile):
 	jsonfile = jsonfile.decode('utf8').replace("'", '"')
@@ -63,10 +64,9 @@ def convert_to_subtitles(line_counter, jsonfile, offset, filepath):
 def main():
 	audio = AudioSegment.from_mp3(AUDIO_INPUT_PATH)
 	audio_slices = audio[::10000]
-	subtitle_slices = readlines(SUBTITLE_INPUT_PATH)
+	subtitle_slices = split_subtitles(readlines(SUBTITLE_INPUT_PATH), len(list(audio_slices)))
 
 	line_counter = 0
-	subtitle_index = -1
 	for index, chunk in enumerate(audio_slices):
 		response = "EMPTY RESPONSE"
 
@@ -78,10 +78,8 @@ def main():
 		# read subtitle slice
 		subtitle_slice_path = f"{INPUT_PATH}/subtitle_{index}.txt"
 		with open(subtitle_slice_path, "w") as f:
-			subtitle_index += 1
-			f.write(subtitle_slices[subtitle_index])
-			subtitle_index += 1
-			f.write(subtitle_slices[subtitle_index])
+			for subtitle in subtitle_slices[index]:
+				f.write(subtitle)
 
 		# send to fog
 		if (index % 2 == 0):
