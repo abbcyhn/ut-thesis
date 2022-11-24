@@ -111,7 +111,9 @@ def main():
 			print("SENDING TO CLOUD")
 			response = sendto(audio_slice_path, subtitle_slice_path, CLOUD_API_ENDPOINT)
 			print("RETRIEVING FROM CLOUD")
-		
+
+		print(response)
+
 		offset = index * 10
 		subtitles = convert_to_subtitles(response, offset)
 		append_subtitles(subtitles, SUBTITLE_OUTPUT_PATH)
