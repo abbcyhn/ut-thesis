@@ -12,7 +12,7 @@ AUDIO_INPUT_PATH = f"{INPUT_PATH}/simple_audio.mp3"
 SUBTITLE_INPUT_PATH = f"{INPUT_PATH}/simple_subtitle.txt"
 
 OUTPUT_PATH = "output"
-SUBTITLE_OUTPUT_PATH = f"{OUTPUT_PATH}/subtitle.srt"
+SUBTITLE_OUTPUT_PATH = f"{OUTPUT_PATH}/simple_subtitle_output.srt"
 
 FOG_API_ENDPOINT = "http://localhost:5000/api/sync"
 CLOUD_API_ENDPOINT = "http://localhost:5000/api/sync"
