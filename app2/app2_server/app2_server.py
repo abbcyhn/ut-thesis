@@ -22,7 +22,7 @@ def main():
 	mainfolder = '..'
 	audio_ext = 'mp3'
 	subtitle_ext = 'txt'
-	output_ext = 'srt'
+	output_ext = 'json'
 
 	unique_filename = str(uuid.uuid4())
 
