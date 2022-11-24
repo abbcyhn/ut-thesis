@@ -39,15 +39,13 @@ def change_format(sec, offset):
 
 def get_as_list(jsonfile):
 	jsonfile = jsonfile.decode('utf8').replace("'", '"')
-	print(f"JSON TYPE IS {type(jsonfile)}")
-	print(f"JSON IS {jsonfile}")
 	myjson = json.loads(jsonfile)
 	return myjson['fragments']
 
-def convert_to_subtitles(jsonfile, offset, filepath):
+def convert_to_subtitles(index, jsonfile, offset, filepath):
 	l = get_as_list(jsonfile)
 
-	index = 1
+	index += 1
 	for i in l:
 		begin = change_format(i['begin'], offset)
 		end = change_format(i['end'], offset)
@@ -95,7 +93,7 @@ def main():
 			print("RETRIEVING FROM CLOUD")
 
 		offset = index * 10
-		convert_to_subtitles(response, offset, SUBTITLE_OUTPUT_PATH)
+		convert_to_subtitles(index, response, offset, SUBTITLE_OUTPUT_PATH)
 
 		# remove slices
 		os.remove(audio_slice_path)
