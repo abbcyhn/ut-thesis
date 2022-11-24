@@ -11,7 +11,7 @@
 
 ### 2) Application 2 - Text-audio synchronisation or forced alignment (Aeneas)
 - [ ] [Client Side](/app2/app2_client/)
-- [ ] [Server Side](/app2/app2_server/)
+- [x] [Server Side](/app2/app2_server/)
 - [x] [System Architecture](/app2/app2.png)
 - Testing scripts
 	- python3 -m aeneas.diagnostics
