@@ -11,8 +11,8 @@ SUBTITLE_INPUT_PATH = f"{INPUT_PATH}/subtitle.txt"
 OUTPUT_PATH = "output"
 SUBTITLE_OUTPUT_PATH = f"{OUTPUT_PATH}/subtitle.srt"
 
-FOG_API_ENDPOINT = "http://localhost:81/api/sync"
-CLOUD_API_ENDPOINT = "http://localhost:81/api/sync"
+FOG_API_ENDPOINT = "http://localhost:5000/api/sync"
+CLOUD_API_ENDPOINT = "http://localhost:5000/api/sync"
 
 def sendto(audio, subtitle, api_endpoint):
 	response = requests.post(url = api_endpoint, files={'audio': audio, 'subtitle': subtitle})
