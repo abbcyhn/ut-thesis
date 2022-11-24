@@ -44,7 +44,7 @@ def readsubtitles(filepath):
 def split_subtitles(slice_counter):
 	subtitle_slices = split_subtitles_helper(readsubtitles(SUBTITLE_INPUT_PATH), slice_counter)
 
-	for index in slice_counter:
+	for index in range(slice_counter):
 		# write subtitle slice
 		subtitle_slice_path = f"{INPUT_PATH}/subtitle_{index}.txt"
 		with open(subtitle_slice_path, "w") as f:
