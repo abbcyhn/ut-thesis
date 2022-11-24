@@ -8,11 +8,11 @@ from pydub import AudioSegment
 
 ###################################################################### CONSTANTS
 INPUT_PATH = "input"
-AUDIO_INPUT_PATH = f"{INPUT_PATH}/simple_audio.mp3"
-SUBTITLE_INPUT_PATH = f"{INPUT_PATH}/simple_subtitle_input.txt"
+AUDIO_INPUT_PATH = f"{INPUT_PATH}/pulp_fiction_audio.mp3"
+SUBTITLE_INPUT_PATH = f"{INPUT_PATH}/pulp_fiction_subtitle_input.txt"
 
 OUTPUT_PATH = "output"
-SUBTITLE_OUTPUT_PATH = f"{OUTPUT_PATH}/simple_subtitle_output.srt"
+SUBTITLE_OUTPUT_PATH = f"{OUTPUT_PATH}/pulp_fiction.srt"
 
 FOG_API_ENDPOINT = "http://localhost:5000/api/sync"
 CLOUD_API_ENDPOINT = "http://172.17.90.194:81/api/sync"
@@ -26,7 +26,7 @@ def split_audios():
 	slice_counter = 0
 	for index, chunk in enumerate(audio_slices):
 		# write audio slice
-		audio_slice_path = f"{INPUT_PATH}/simple_audio_{index}.mp3"	
+		audio_slice_path = f"{INPUT_PATH}/pulp_fiction_audio_{index}.mp3"	
 		with open(audio_slice_path, "wb") as f:
 			chunk.export(f, format="mp3")
 		
@@ -46,7 +46,7 @@ def split_subtitles(slice_counter):
 
 	for index in range(slice_counter):
 		# write subtitle slice
-		subtitle_slice_path = f"{INPUT_PATH}/simple_subtitle_{index}.txt"
+		subtitle_slice_path = f"{INPUT_PATH}/pulp_fiction_subtitle_{index}.txt"
 		with open(subtitle_slice_path, "w") as f:
 			for subtitle in list(subtitle_slices[index]):
 				f.write(subtitle)
@@ -107,10 +107,10 @@ def main():
 		response = "EMPTY RESPONSE"
 
 		# audio slice
-		audio_slice_path = f"{INPUT_PATH}/simple_audio_{index}.mp3"
+		audio_slice_path = f"{INPUT_PATH}/pulp_fiction_audio_{index}.mp3"
 
 		# subtitle slice
-		subtitle_slice_path = f"{INPUT_PATH}/simple_subtitle_{index}.txt"
+		subtitle_slice_path = f"{INPUT_PATH}/pulp_fiction_subtitle_{index}.txt"
 
 		# send to fog
 		if (index % 2 == 0):
