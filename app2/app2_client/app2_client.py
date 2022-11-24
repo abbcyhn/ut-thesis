@@ -42,28 +42,31 @@ def get_as_list(jsonfile):
 	myjson = json.loads(jsonfile)
 	return myjson['fragments']
 
-def convert_to_subtitles(index, jsonfile, offset, filepath):
+def convert_to_subtitles(line_counter, jsonfile, offset, filepath):
 	l = get_as_list(jsonfile)
 
-	index += 1
+	line_counter += 1
 	for i in l:
 		begin = change_format(i['begin'], offset)
 		end = change_format(i['end'], offset)
 		lines = i['lines']
 
-		subtitle = f"{index}\n"
+		subtitle = f"{line_counter}\n"
 		subtitle += f"{begin} --> {end}"
 		for line in lines:
 			subtitle += f"\n{line}"
 		subtitle += "\n\n"
 		with open(filepath, 'a') as f: f.write(subtitle)
-		index += 1
+		line_counter += 1
+	
+	return line_counter
 
 def main():
 	audio = AudioSegment.from_mp3(AUDIO_INPUT_PATH)
 	audio_slices = audio[::10000]
 	subtitle_slices = readlines(SUBTITLE_INPUT_PATH)
 
+	line_counter = 0
 	subtitle_index = -1
 	for index, chunk in enumerate(audio_slices):
 		response = "EMPTY RESPONSE"
@@ -93,7 +96,7 @@ def main():
 			print("RETRIEVING FROM CLOUD")
 
 		offset = index * 10
-		convert_to_subtitles(index, response, offset, SUBTITLE_OUTPUT_PATH)
+		line_counter = convert_to_subtitles(line_counter, response, offset, SUBTITLE_OUTPUT_PATH)
 
 		# remove slices
 		os.remove(audio_slice_path)
