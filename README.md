@@ -36,11 +36,13 @@
 - sudo chmod 666 /var/run/docker.sock
 - sudo systemctl restart docker
 
-### 2) Docker build, run
+### 2) Docker build, run, tag, service
 
 - docker build -t $IMAGE_NAME:latest . 
 - docker build -t $IMAGE_NAME -f $DOCKER_FILE_NAME .
-- docker run -d -p 80:5000 $IMAGE_NAME:latest
+- docker run -d -p 0:5000 $IMAGE_NAME:latest
+- docker image tag app1-fog:latest abbcyhn/app1-fog:latest
+- docker service create --name app1-fog --replicas 1 --publish 0:5000 abbcyhn/app1-fog
 
 ### 3) Docker exec, logs
 
