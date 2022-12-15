@@ -31,7 +31,7 @@ def split_audios():
 	# slice_counter = 0
 	for index, chunk in enumerate(audio_slices):
 		# write audio slice
-		audio_slice_path = f"{INPUT_PATH}/simple_audio_{index}.mp3"	
+		audio_slice_path = f"{INPUT_PATH}/pulp_fiction_audio_{index}.mp3"	
 		with open(audio_slice_path, "wb") as f:
 			chunk.export(f, format="mp3")
 		
@@ -51,7 +51,7 @@ def split_subtitles(slice_counter):
 
 	for index in range(slice_counter):
 		# write subtitle slice
-		subtitle_slice_path = f"{INPUT_PATH}/simple_subtitle_{index}.txt"
+		subtitle_slice_path = f"{INPUT_PATH}/pulp_fiction_subtitle_{index}.txt"
 		with open(subtitle_slice_path, "w") as f:
 			for subtitle in list(subtitle_slices[index]):
 				f.write(subtitle)
@@ -73,7 +73,7 @@ def sendto(audio_path, subtitle_path, api_endpoint):
 
 ###################################################################### OUTPUT MERGING
 def get_as_list(jsonfile):
-	jsonfile = jsonfile.decode('utf8').replace("'", '"')
+	jsonfile = jsonfile.decode('utf8')
 	myjson = json.loads(jsonfile)
 	return myjson['fragments']
 
@@ -119,10 +119,10 @@ def main():
 		response = "EMPTY RESPONSE"
 
 		# audio slice
-		audio_slice_path = f"{INPUT_PATH}/simple_audio_{index}.mp3"
+		audio_slice_path = f"{INPUT_PATH}/pulp_fiction_audio_{index}.mp3"
 
 		# subtitle slice
-		subtitle_slice_path = f"{INPUT_PATH}/simple_subtitle_{index}.txt"
+		subtitle_slice_path = f"{INPUT_PATH}/pulp_fiction_subtitle_{index}.txt"
 
 		# send to fog
 		if (index % 2 == 0):
