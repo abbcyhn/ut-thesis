@@ -33,18 +33,18 @@ def get_count_of_audio_slices():
 def split_audios():
 	audio_slices = get_audio_slices()
 
-	# slice_counter = 0
+	slice_counter = 0
 	for index, chunk in enumerate(audio_slices):
 		# remove music for pulp fiction
 		if index == 0 or index == 1 or index == 2:
 			continue
 
 		# write audio slice
-		audio_slice_path = f"{INPUT_PATH}/pulp_fiction_audio_{index}.mp3"	
+		audio_slice_path = f"{INPUT_PATH}/pulp_fiction_audio_{slice_counter}.mp3"	
 		with open(audio_slice_path, "wb") as f:
 			chunk.export(f, format="mp3")
 		
-	# 	slice_counter += 1
+		slice_counter += 1
 	
 	# return slice_counter
 
