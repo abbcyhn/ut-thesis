@@ -121,11 +121,6 @@ def main():
 	print("SENDING api is started")
 	line_counter = 0
 	for index in range(slice_counter):
-		
-		# remove music for pulp fiction
-		if index == 0 or index == 1 or index == 2:
-			continue
-
 		response = "EMPTY RESPONSE"
 
 		# audio slice
