@@ -19,17 +19,26 @@ CLOUD_API_ENDPOINT = "http://172.17.90.194:81/api/sync"
 
 
 ###################################################################### AUDIO SLICING
-def get_count_of_audio_slices():
+def get_audio_slices():
 	audio = AudioSegment.from_mp3(AUDIO_INPUT_PATH)
 	audio_slices = audio[::10000]
-	return len(list(audio_slices))
+	return audio_slices
+
+def get_count_of_audio_slices():
+	audio_slices = get_audio_slices()
+	length = len(list(audio_slices))
+	length = length - 3 # remove music for pulp fiction
+	return length
 
 def split_audios():
-	audio = AudioSegment.from_mp3(AUDIO_INPUT_PATH)
-	audio_slices = audio[::10000]
+	audio_slices = get_audio_slices()
 
 	# slice_counter = 0
 	for index, chunk in enumerate(audio_slices):
+		# remove music for pulp fiction
+		if index == 0 or index == 1 or index == 2:
+			continue
+
 		# write audio slice
 		audio_slice_path = f"{INPUT_PATH}/pulp_fiction_audio_{index}.mp3"	
 		with open(audio_slice_path, "wb") as f:
