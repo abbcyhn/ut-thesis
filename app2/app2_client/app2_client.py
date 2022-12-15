@@ -27,7 +27,6 @@ def get_audio_slices():
 def get_count_of_audio_slices():
 	audio_slices = get_audio_slices()
 	length = len(list(audio_slices))
-	length = length - 3 # remove music for pulp fiction
 	return length
 
 def split_audios():
@@ -35,9 +34,6 @@ def split_audios():
 
 	slice_counter = 0
 	for index, chunk in enumerate(audio_slices):
-		# remove music for pulp fiction
-		if index == 0 or index == 1 or index == 2:
-			continue
 
 		# write audio slice
 		audio_slice_path = f"{INPUT_PATH}/pulp_fiction_audio_{slice_counter}.mp3"	
@@ -125,6 +121,11 @@ def main():
 	print("SENDING api is started")
 	line_counter = 0
 	for index in range(slice_counter):
+		
+		# remove music for pulp fiction
+		if index == 0 or index == 1 or index == 2:
+			continue
+
 		response = "EMPTY RESPONSE"
 
 		# audio slice
