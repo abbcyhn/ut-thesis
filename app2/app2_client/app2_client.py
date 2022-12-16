@@ -38,17 +38,12 @@ def get_count_of_audio_slices():
 def split_audios():
 	audio_slices = get_audio_slices()
 
-	slice_counter = 0
 	for index, chunk in enumerate(audio_slices):
-
 		# write audio slice
-		audio_slice_path = f"{INPUT_AUDIO_CHUNKS_PATH}_{slice_counter}.mp3"	
+		audio_slice_path = f"{INPUT_AUDIO_CHUNKS_PATH}_{index}.mp3"	
 		with open(audio_slice_path, "wb") as f:
 			chunk.export(f, format="mp3")
 		
-		slice_counter += 1
-	
-	# return slice_counter
 
 
 ###################################################################### SUBTITLE SLICING
@@ -115,8 +110,10 @@ def convert_to_subtitles(line_counter, jsonfile, offset, filepath):
 
 
 def main():
+	slice_counter = get_count_of_audio_slices()
+
 	print("SPLITTING audios")
-	slice_counter = split_audios()
+	split_audios()
 
 	print("SPLITTING subtitles")
 	split_subtitles(slice_counter)
@@ -148,8 +145,8 @@ def main():
 		line_counter = convert_to_subtitles(line_counter, response, offset, OUTPUT_SUBTITLE_PATH)
 
 		# remove slices
-		# os.remove(audio_slice_path)
-		# os.remove(subtitle_slice_path)
+		os.remove(audio_slice_path)
+		os.remove(subtitle_slice_path)
 
 
 if __name__ == '__main__':
