@@ -7,12 +7,18 @@ from pydub import AudioSegment
 
 
 ###################################################################### CONSTANTS
-INPUT_PATH = "input"
-AUDIO_INPUT_PATH = f"{INPUT_PATH}/pulp_fiction_audio.mp3"
-SUBTITLE_INPUT_PATH = f"{INPUT_PATH}/pulp_fiction_subtitle_input.txt"
+INPUT_FOLDER = "input/input2"
+INPUT_AUDIO_FILE_NAME = "movie_audio.mp3"
+INPUT_SUBTITLE_FILE_NAME = "movie_subtitle.txt"
+INPUT_AUDIO_PATH = f"{INPUT_FOLDER}/{INPUT_AUDIO_FILE_NAME}"
+INPUT_SUBTITLE_PATH = f"{INPUT_FOLDER}/{INPUT_SUBTITLE_FILE_NAME}"
+INPUT_AUDIO_CHUNKS_PATH = f"{INPUT_FOLDER}/audio_chunks/{INPUT_AUDIO_FILE_NAME}"
+INPUT_SUBTITLE_CHUNKS_PATH = f"{INPUT_FOLDER}/subtitle_chunks/{INPUT_SUBTITLE_FILE_NAME}"
 
-OUTPUT_PATH = "output"
-SUBTITLE_OUTPUT_PATH = f"{OUTPUT_PATH}/pulp_fiction_subtitle_output.srt"
+
+OUTPUT_FOLDER = "output/output2"
+OUTPUT_SUBTITLE_FILE_NAME = "generated.srt"
+OUTPUT_SUBTITLE_PATH = f"{OUTPUT_FOLDER}/{OUTPUT_SUBTITLE_FILE_NAME}"
 
 FOG_API_ENDPOINT = "http://localhost:81/api/sync"
 CLOUD_API_ENDPOINT = "http://172.17.90.194:81/api/sync"
@@ -20,7 +26,7 @@ CLOUD_API_ENDPOINT = "http://172.17.90.194:81/api/sync"
 
 ###################################################################### AUDIO SLICING
 def get_audio_slices():
-	audio = AudioSegment.from_mp3(AUDIO_INPUT_PATH)
+	audio = AudioSegment.from_mp3(INPUT_AUDIO_PATH)
 	audio_slices = audio[::10000]
 	return audio_slices
 
@@ -36,7 +42,7 @@ def split_audios():
 	for index, chunk in enumerate(audio_slices):
 
 		# write audio slice
-		audio_slice_path = f"{INPUT_PATH}/pulp_fiction_audio_{slice_counter}.mp3"	
+		audio_slice_path = f"{INPUT_AUDIO_CHUNKS_PATH}_{slice_counter}.mp3"	
 		with open(audio_slice_path, "wb") as f:
 			chunk.export(f, format="mp3")
 		
@@ -52,11 +58,11 @@ def readsubtitles(filepath):
 	return lines
 
 def split_subtitles(slice_counter):
-	subtitle_slices = split_subtitles_helper(readsubtitles(SUBTITLE_INPUT_PATH), slice_counter)
+	subtitle_slices = split_subtitles_helper(readsubtitles(INPUT_SUBTITLE_PATH), slice_counter)
 
 	for index in range(slice_counter):
 		# write subtitle slice
-		subtitle_slice_path = f"{INPUT_PATH}/pulp_fiction_subtitle_{index}.txt"
+		subtitle_slice_path = f"{INPUT_SUBTITLE_CHUNKS_PATH}_{index}.txt"
 		with open(subtitle_slice_path, "w") as f:
 			for subtitle in list(subtitle_slices[index]):
 				f.write(subtitle)
@@ -109,11 +115,8 @@ def convert_to_subtitles(line_counter, jsonfile, offset, filepath):
 
 
 def main():
-	print("CALCULATING count of audio slices")
-	slice_counter = get_count_of_audio_slices()
-
 	print("SPLITTING audios")
-	split_audios()
+	slice_counter = split_audios()
 
 	print("SPLITTING subtitles")
 	split_subtitles(slice_counter)
@@ -124,10 +127,10 @@ def main():
 		response = "EMPTY RESPONSE"
 
 		# audio slice
-		audio_slice_path = f"{INPUT_PATH}/pulp_fiction_audio_{index}.mp3"
+		audio_slice_path = f"{INPUT_AUDIO_CHUNKS_PATH}_{index}.mp3"
 
 		# subtitle slice
-		subtitle_slice_path = f"{INPUT_PATH}/pulp_fiction_subtitle_{index}.txt"
+		subtitle_slice_path = f"{INPUT_SUBTITLE_CHUNKS_PATH}_{index}.txt"
 
 		# send to fog
 		if (index % 2 == 0):
@@ -142,11 +145,11 @@ def main():
 
 		# merging
 		offset = index * 10
-		line_counter = convert_to_subtitles(line_counter, response, offset, SUBTITLE_OUTPUT_PATH)
+		line_counter = convert_to_subtitles(line_counter, response, offset, OUTPUT_SUBTITLE_PATH)
 
 		# remove slices
-		os.remove(audio_slice_path)
-		os.remove(subtitle_slice_path)
+		# os.remove(audio_slice_path)
+		# os.remove(subtitle_slice_path)
 
 
 if __name__ == '__main__':
