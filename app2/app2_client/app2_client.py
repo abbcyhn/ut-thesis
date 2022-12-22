@@ -20,7 +20,7 @@ OUTPUT_FOLDER = "output/output2"
 OUTPUT_SUBTITLE_FILE_NAME = "video.srt"
 OUTPUT_SUBTITLE_PATH = f"{OUTPUT_FOLDER}/{OUTPUT_SUBTITLE_FILE_NAME}"
 
-FOG_API_ENDPOINT = "http://localhost:81/api/sync"
+FOG_API_ENDPOINT = "http://172.17.142.22:30001/api/sync"
 CLOUD_API_ENDPOINT = "http://172.17.90.194:81/api/sync"
 
 
