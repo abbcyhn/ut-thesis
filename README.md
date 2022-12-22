@@ -10,7 +10,7 @@
 	- curl -X POST -F image=@traffic.jpg 'http://$IP:$PORT/api/detect' --output traffic_yolo.png
 
 ### 2) Application 2 - Text-audio synchronisation or forced alignment (Aeneas)
-- [ ] [Client Side](/app2/app2_client/)
+- [x] [Client Side](/app2/app2_client/)
 - [x] [Server Side](/app2/app2_server/)
 - [x] [System Architecture](/app2/app2.png)
 - Testing scripts
