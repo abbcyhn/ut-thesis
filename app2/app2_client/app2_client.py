@@ -27,7 +27,7 @@ CLOUD_API_ENDPOINT = "http://172.17.90.194:81/api/sync"
 ###################################################################### AUDIO SLICING
 def get_audio_slices():
 	audio = AudioSegment.from_mp3(INPUT_AUDIO_PATH)
-	audio_slices = audio[::10000]
+	audio_slices = audio[::20000]
 	return audio_slices
 
 def get_count_of_audio_slices():
